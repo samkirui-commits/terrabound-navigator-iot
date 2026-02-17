@@ -1,47 +1,45 @@
-<p align="center">
-  <img src="URL_TO_YOUR_UPLOADED_IMAGE" width="100%" alt="TerraBound Hub Banner" />
-</p>
+import streamlit as st
+import time
+import random
 
-<h1 align="center">TERRABOUND NAVIGATOR</h1>
-<p align="center"><strong>Land-Independent IoT Agricultural Infrastructure</strong></p>
+# Page Config
+st.set_page_config(page_title="TerraBound Digital Twin", page_icon="🌱")
 
-<p align="center">
-  <a href="STATUS.md" target="_blank"><img src="https://img.shields.io/badge/STATUS-BILLION--DOLLAR--PROTOTYPE-006400?style=for-the-badge" /></a>
-  <a href="FOCUS.md" target="_blank"><img src="https://img.shields.io/badge/FOCUS-CLIMATE_RESILIENCE-00008B?style=for-the-badge" /></a>
-  <a href="HARDWARE.md" target="_blank"><img src="https://img.shields.io/badge/HARDWARE-ESP32_HYBRID-8B4513?style=for-the-badge" /></a>
-</p>
+st.title("🌱 TerraBound: Digital Twin AI")
+st.markdown("### *Mission Control for Biodiversity Restoration*")
 
-<p align="center"><i>(Click any badge above to open full technical specifications in a new tab)</i></p>
+# Sidebar for IoT Inputs
+st.sidebar.header("📡 Live IoT Sensor Feed")
+temp = st.sidebar.slider("Ambient Temperature (°C)", 15, 50, 25)
+moisture = st.sidebar.slider("Soil Moisture (%)", 0, 100, 40)
+uv_index = st.sidebar.sidebar.number_input("UV Index", 0, 15, 5)
 
----
+# Main Interface
+species = st.selectbox("Select Species for Simulation", 
+                      ["Acacia tortilis (Umbrella Thorn)", 
+                       "Olea europaea (Wild Olive)", 
+                       "Kigelia africana (Sausage Tree)"])
 
-## Executive Summary
-TerraBound addresses the global crisis of soil degradation and geographic instability. Our framework decouples high-yield food production from traditional land requirements by utilizing vertical structures and precision nutrient delivery systems.
+is_hardened = st.toggle("Enable CRISPR Genetic Hardening")
 
----
+if st.button("Run Digital Twin Simulation"):
+    with st.status("Analyzing Genetic Resilience...", expanded=True) as status:
+        st.write("Syncing with Subterranean Cryo-Vault...")
+        time.sleep(1)
+        st.write("Running Trophic Cascade Models...")
+        time.sleep(1)
+        st.write("Simulating 2050 Climate Stressors...")
+        time.sleep(1)
+        status.update(label="Simulation Complete!", state="complete", expanded=False)
 
-## Technical Infrastructure Stack
+    # Logic for Prediction
+    if is_hardened:
+        survival = random.randint(88, 99)
+        st.success(f"PROJECTION: {survival}% Survival Rate")
+        st.balloons()
+    else:
+        survival = random.randint(15, 45)
+        st.error(f"PROJECTION: {survival}% Survival Rate (High Risk of Extinction)")
 
-| Layer | Component | Strategic Value |
-| :--- | :--- | :--- |
-| **Physical** | Treated Structural Bamboo | Carbon-negative and locally sourced materials |
-| **Logic** | ESP32 Microcontroller | Scalable processing with integrated WiFi connectivity |
-| **Bio-Chemical** | Organic Compost Tea | Eliminates dependence on imported chemical fertilizers |
-| **Digital** | Navigator App Interface | Remote analytics and predictive maintenance |
-
----
-
-## Implementation Logic
-```cpp
-/**
- * TerraBound Core Loop
- * Synchronizes hardware vitals with the Navigator Interface
- */
-void loop() {
-  float currentPH = readPHSensor(); 
-  Blynk.virtualWrite(V1, currentPH); 
-  
-  if (currentPH < 5.5) {
-    executeNutrientAdjustment();
-  }
-}
+    st.metric(label="Biomass Growth Acceleration", value="40%", delta="Aeroponics Active")
+    st.progress(survival, text="Species Resilience Level")
